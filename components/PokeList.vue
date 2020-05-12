@@ -1,12 +1,10 @@
 <template>
-  <div>
-    <div class="container list">
-      <div v-for="(pokemon, index) in pokemons" :key="index">
-        <button type="button" class="btn btn-info pokebutton">
-          <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
-          <h4>{{ pokemon.name }}</h4>
-        </button>
-      </div>
+  <div class="container list">
+    <div v-for="(pokemon, index) in pokemons" :key="index">
+      <button type="button" class="btn btn-info pokebutton" @click="showDetail(pokemon.url)">
+        <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
+        <h4>{{ pokemon.name }}</h4>
+      </button>
     </div>
   </div>
 </template>
@@ -17,9 +15,14 @@ export default {
     pokemons: Array,
     pokeID: Array
   },
-  data() {
+  data: () => {
     return {
       imgURL: 'https://pokeres.bastionbot.org/images/pokemon/'
+    }
+  },
+  methods: {
+    showDetail(url) {
+      this.$emit('showDetail', url)
     }
   }
 }

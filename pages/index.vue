@@ -1,31 +1,26 @@
 <template>
   <div class="text-center">
     <h1>POKEDEX</h1>
-    <PokeList :pokemons="pokemons" :pokeID="pokeID"/>
-    <!-- <div class="container list">
-      <div v-for="(pokemon, index) in pokemons" :key="index">
-        <button type="button" class="btn btn-info pokebutton">
-          <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
-          <h4>{{ pokemon.name }}</h4>
-        </button>
-      </div>
-    </div> -->
+    <PokeList :pokemons="pokemons" :pokeID="pokeID" @showDetail="showDetail"/>
+    <PokeDetail v-if="IsDetailShow" :pokeURL="pokeURL" @closeDetail="closeDetail"/>
   </div>
 </template>
 
 <script>
 import PokeList from '~/components/PokeList.vue'
+import PokeDetail from '~/components/PokeDetail.vue'
 export default {
   components: {
-    PokeList
+    PokeList,
+    PokeDetail
   },
-  data() {
+  data: () => {
     return {
       apiURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
       pokemons: [],
       pokeID: [],
       pokeURL: '',
-      showDetail: false
+      IsDetailShow: false
     }
   },
   created() {
@@ -46,6 +41,18 @@ export default {
         .catch((error) => {
           console.log(error)
         })
+    },
+    showDetail(url) {
+      this.pokeURL = url
+      this.isDetailShow = true
+      console.log(url)
+    },
+    closeDetail() {
+      this.pokeURL = ''
+      this.isDetailShow = false
+    },
+    IDS() {
+      return this.isDetailShow
     }
   }
 }
