@@ -1,26 +1,31 @@
 <template>
   <div class="text-center">
     <h1>POKEDEX</h1>
-    <div class="container list">
+    <PokeList :pokemons="pokemons" :pokeID="pokeID"/>
+    <!-- <div class="container list">
       <div v-for="(pokemon, index) in pokemons" :key="index">
         <button type="button" class="btn btn-info pokebutton">
           <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
           <h4>{{ pokemon.name }}</h4>
         </button>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import PokeList from '~/components/PokeList.vue'
 export default {
+  components: {
+    PokeList
+  },
   data() {
     return {
-      imgURL: 'https://pokeres.bastionbot.org/images/pokemon/',
-      CurrentURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
-      NextURL: '',
+      apiURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
       pokemons: [],
-      pokeID: []
+      pokeID: [],
+      pokeURL: '',
+      showDetail: false
     }
   },
   created() {
@@ -28,18 +33,15 @@ export default {
   },
   methods: {
     fetchData() {
-      console.log(this.CurrentURL)
-      fetch(this.CurrentURL)
+      fetch(this.apiURL)
         .then((response) => {
           return response.json()
         })
         .then((data) => {
-          this.nextUrl = data.next
           data.results.forEach((pokemon) => {
             this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
             this.pokemons.push(pokemon)
           })
-          console.log(this.pokemon)
         })
         .catch((error) => {
           console.log(error)
