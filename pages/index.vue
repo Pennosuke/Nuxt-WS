@@ -1,12 +1,14 @@
 <template>
-  <div class="list">
+  <div class="text-center">
     <h1>POKEDEX</h1>
-    <ul v-for="(pokemon, index) in pokemons" :key="index">
-      <button type="button" class="btn btn-info pokebutton">
-        <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
-        <h4>{{ pokemon.name }}</h4>
-      </button>
-    </ul>
+    <div class="container list">
+      <div v-for="(pokemon, index) in pokemons" :key="index">
+        <button type="button" class="btn btn-info pokebutton">
+          <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
+          <h4>{{ pokemon.name }}</h4>
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -57,5 +59,14 @@ export default {
   height: 200px;
   border-radius: 20px;
   box-shadow: -1.2px 13.9px 32px 0 rgba(60, 60, 62, 0.27);
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 10px;
+  width: 100%;
+  max-width: 800px;
 }
 </style>
