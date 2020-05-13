@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <h1>POKEDEX</h1>
+    <h1 class="header">POKEDEX</h1>
     <poke-list v-if="!IsDetailShow" :apiURL="apiURL" :imgURL="imgURL" @showDetail="showDetail"></poke-list>
     <poke-detail v-if="IsDetailShow" :pokeURL="pokeURL" :imgURL="imgURL" @closeDetail="closeDetail"></poke-detail>
   </div>
@@ -36,6 +36,10 @@ export default {
 </script>
 
 <style>
+.header {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .pokemon-size {
   width: 95px;
   height: 95px;

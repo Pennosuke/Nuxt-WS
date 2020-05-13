@@ -35,7 +35,7 @@
         <h4>Type</h4>
       </div>
       <div class="col-md-6 rounded-square-area">
-        <div v-for="(value, index) in pokemon.types" :key="index" class="type">
+        <div v-for="(value, index) in pokemon.types" :key="index" :data-color="value.type.name" class="type">
           <h5>{{value.type.name}}</h5>
         </div>
       </div>
@@ -99,7 +99,7 @@ export default {
   justify-content: center;
   flex-wrap: wrap;
 }
-.type {
+.type[data-color = "bug"] {
   margin-bottom: 10px;
   margin-inline: 5px;
   padding-top: 5px;
@@ -107,7 +107,177 @@ export default {
   border-radius: 30px;
   color: #ffffff;
   letter-spacing: 2px;
-  background-color: #0A2E50;
+  background-color: #6D7815;
+}
+.type[data-color = "dark"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #49392F;
+}
+.type[data-color = "dragon"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #4924A1;
+}
+.type[data-color = "electric"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #A1871F;
+}
+.type[data-color = "fairy"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #9B6470;
+}
+.type[data-color = "fighting"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #7D1F1A;
+}
+.type[data-color = "fire"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #9C531F;
+}
+.type[data-color = "flying"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #6D5E9C;
+}
+.type[data-color = "ghost"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #493963;
+}
+.type[data-color = "grass"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #4E8234;
+}
+.type[data-color = "ground"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #927D44;
+}
+.type[data-color = "ice"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #638D8D;
+}
+.type[data-color = "normal"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #6D6D4E;
+}
+.type[data-color = "poison"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #682A68;
+}
+.type[data-color = "psychic"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #A13959;
+}
+.type[data-color = "rock"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #786824;
+}
+.type[data-color = "steel"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #787887;
+}
+.type[data-color = "water"] {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #445E9C;
 }
 .ability {
   margin-bottom: 10px;
@@ -117,6 +287,6 @@ export default {
   border-radius: 30px;
   color: #ffffff;
   letter-spacing: 2px;
-  background-color: #A37523;
+  background-color: #44685E;
 }
 </style>
