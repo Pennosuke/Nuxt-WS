@@ -1,16 +1,8 @@
 <template>
   <div class="text-center">
     <h1>POKEDEX</h1>
-    <PokeList
-      :apiURL="apiURL"
-      :imgURL="imgURL"
-      @showDetail="showDetail"
-    />
-    <PokeDetail
-      v-if="IsDetailShow"
-      :pokeURL="pokeURL"
-      :imgURL="imgURL"
-    />
+    <poke-list v-if="!IsDetailShow" :apiURL="apiURL" :imgURL="imgURL" @showDetail="showDetail"></poke-list>
+    <poke-detail v-if="IsDetailShow" :pokeURL="pokeURL" :imgURL="imgURL" @closeDetail="closeDetail"></poke-detail>
   </div>
 </template>
 
@@ -33,13 +25,11 @@ export default {
   methods: {
     showDetail(url) {
       this.pokeURL = url
-      this.isDetailShow = true
-      console.log('pokeURL = ' + this.pokeURL)
-      console.log('IsDetailShow = ' + this.IsDetailShow)
+      this.IsDetailShow = true
     },
     closeDetail() {
       this.pokeURL = ''
-      this.isDetailShow = false
+      this.IsDetailShow = false
     }
   }
 }

@@ -1,15 +1,56 @@
 <template>
-  <div class="detail">
-    <div v-if="show" class="detail-view">
-      <div v-if="pokemon" class="image">
-        <img :src="imgURL + pokeID[index] + '.png'" class="pokemon-size" />
-      </div>
-      <div v-if="pokemon" class="data">
-        <h2>
-          {{ pokemon.name }}
-        </h2>
+  <div class="container">
+    <img :src="imgURL + pokeID + '.png'" class="pokemon-size" />
+    <div class="row">
+      <div class="col-md-12">
+        <h2>{{ pokemon.name }}</h2>
       </div>
     </div>
+    <div class="row bottom-line">
+      <div class="col-md-6">
+        <h4>Base Experience</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>{{ pokemon.base_experience }}</h4>
+      </div>
+    </div>
+    <div class="row bottom-line">
+      <div class="col-md-6">
+        <h4>Height</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>{{ pokemon.height }}</h4>
+      </div>
+    </div>
+    <div class="row bottom-line">
+      <div class="col-md-6">
+        <h4>Weight</h4>
+      </div>
+      <div class="col-md-6">
+        <h4>{{ pokemon.weight }}</h4>
+      </div>
+    </div>
+    <div class="row bottom-line">
+      <div class="col-md-6">
+        <h4>Type</h4>
+      </div>
+      <div class="col-md-6 rounded-square-area">
+        <div v-for="(value, index) in pokemon.types" :key="index" class="type">
+          <h5>{{value.type.name}}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="row bottom-line">
+      <div class="col-md-6">
+        <h4>Abilities</h4>
+      </div>
+      <div class="col-md-6 rounded-square-area">
+        <div v-for="(value, index) in pokemon.abilities" :key="index" class="ability">
+          <h5>{{value.ability.name}}</h5>
+        </div>
+      </div>
+    </div>
+    <button type="button" class="btn btn-primary" @click="closeDetail">Close</button>
   </div>
 </template>
 
@@ -22,7 +63,8 @@ export default {
   data: () => {
     return {
       show: false,
-      pokemon: {}
+      pokemon: {},
+      pokeID: ''
     }
   },
   created() {
@@ -33,57 +75,48 @@ export default {
       const response = await fetch(this.pokeURL)
       const data = await response.json()
       this.pokemon = data
+      this.pokeID = this.pokeURL.split('/').filter(function(part) { return !!part }).pop()
+    },
+    closeDetail() {
+      this.$emit('closeDetail')
     }
   }
 }
 </script>
 
 <style scoped>
-.detail {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding: 90px 10px 10px;
-}
-.detail-view {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-  max-width: 510px;
-  padding: 50px 0 0;
-  background-color: #fff;
-  border-radius: 5px;
-  box-shadow: 0 15px 30px rgba(0,0,0,.2);
-}
-.image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: -60px;
-  width: 120px;
-  height: 120px;
-  background-color: #333;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0,0,0,.2);
-}
 .pokemon-size {
   width: 95px;
   height: 95px;
 }
-.data {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
+.bottom-line {
+  border-bottom: 1px solid #cccccc;
+  margin-bottom: 10px;
   width: 100%;
-  margin-bottom: 40px;
+}
+.rounded-square-area {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.type {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #0A2E50;
+}
+.ability {
+  margin-bottom: 10px;
+  margin-inline: 5px;
+  padding-top: 5px;
+  padding-inline: 10px;
+  border-radius: 30px;
+  color: #ffffff;
+  letter-spacing: 2px;
+  background-color: #A37523;
 }
 </style>
