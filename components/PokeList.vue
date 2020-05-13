@@ -12,15 +12,27 @@
 <script>
 export default {
   props: {
-    pokemons: Array,
-    pokeID: Array
+    apiURL: String,
+    imgURL: String
   },
   data: () => {
     return {
-      imgURL: 'https://pokeres.bastionbot.org/images/pokemon/'
+      pokeID: [],
+      pokemons: []
     }
   },
+  created() {
+    this.fetchData()
+  },
   methods: {
+    async fetchData() {
+      const response = await fetch(this.apiURL)
+      const data = await response.json()
+      data.results.forEach((pokemon) => {
+        this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
+        this.pokemons.push(pokemon)
+      })
+    },
     showDetail(url) {
       this.$emit('showDetail', url)
     }

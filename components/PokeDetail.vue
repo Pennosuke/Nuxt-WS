@@ -6,30 +6,21 @@
       </div>
       <div v-if="pokemon" class="data">
         <h2>
-          {{pokemon.name}}
+          {{ pokemon.name }}
         </h2>
-        <div class="property">
-          <div class="left">
-            Base Experience
-          </div>
-          <div class="right">
-            {{ pokemon.base_experience }}
-          </div>
-        </div>
       </div>
     </div>
-    <i v-else class="fas fa-spinner fa-spin"></i>
   </div>
 </template>
 
 <script>
 export default {
   props: {
-    pokeURL: String
+    pokeURL: String,
+    imgURL: String
   },
   data: () => {
     return {
-      imgURL: 'https://pokeres.bastionbot.org/images/pokemon/',
       show: false,
       pokemon: {}
     }
@@ -38,17 +29,10 @@ export default {
     this.fetchData()
   },
   methods: {
-    fetchData() {
-      fetch(this.pokeURL)
-        .then((response) => {
-          return response.json()
-        })
-        .then((data) => {
-          this.pokemon = data
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+    async fetchData() {
+      const response = await fetch(this.pokeURL)
+      const data = await response.json()
+      this.pokemon = data
     }
   }
 }
@@ -63,8 +47,6 @@ export default {
   top: 0;
   left: 0;
   padding: 90px 10px 10px;
-  width: calc(100% - 20px);
-  height: calc(100vh - 20px);
 }
 .detail-view {
   display: flex;
@@ -77,8 +59,7 @@ export default {
   padding: 50px 0 0;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 15px 30px rgba(0,0,0,.2),
-              0 10px 10px rgba(0,0,0,.2);
+  box-shadow: 0 15px 30px rgba(0,0,0,.2);
 }
 .image {
   display: flex;
@@ -91,8 +72,7 @@ export default {
   background-color: #333;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 15px 30px rgba(0,0,0,.2),
-              0 10px 10px rgba(0,0,0,.2);
+  box-shadow: 0 15px 30px rgba(0,0,0,.2);
 }
 .pokemon-size {
   width: 95px;

@@ -1,8 +1,16 @@
 <template>
   <div class="text-center">
     <h1>POKEDEX</h1>
-    <PokeList :pokemons="pokemons" :pokeID="pokeID" @showDetail="showDetail"/>
-    <PokeDetail v-if="IsDetailShow" :pokeURL="pokeURL" @closeDetail="closeDetail"/>
+    <PokeList
+      :apiURL="apiURL"
+      :imgURL="imgURL"
+      @showDetail="showDetail"
+    />
+    <PokeDetail
+      v-if="IsDetailShow"
+      :pokeURL="pokeURL"
+      :imgURL="imgURL"
+    />
   </div>
 </template>
 
@@ -17,42 +25,21 @@ export default {
   data: () => {
     return {
       apiURL: 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20',
-      pokemons: [],
-      pokeID: [],
+      imgURL: 'https://pokeres.bastionbot.org/images/pokemon/',
       pokeURL: '',
       IsDetailShow: false
     }
   },
-  created() {
-    this.fetchData()
-  },
   methods: {
-    fetchData() {
-      fetch(this.apiURL)
-        .then((response) => {
-          return response.json()
-        })
-        .then((data) => {
-          data.results.forEach((pokemon) => {
-            this.pokeID.push(pokemon.url.split('/').filter(function(part) { return !!part }).pop())
-            this.pokemons.push(pokemon)
-          })
-        })
-        .catch((error) => {
-          console.log(error)
-        })
-    },
     showDetail(url) {
       this.pokeURL = url
       this.isDetailShow = true
-      console.log(url)
+      console.log('pokeURL = ' + this.pokeURL)
+      console.log('IsDetailShow = ' + this.IsDetailShow)
     },
     closeDetail() {
       this.pokeURL = ''
       this.isDetailShow = false
-    },
-    IDS() {
-      return this.isDetailShow
     }
   }
 }
@@ -67,15 +54,8 @@ export default {
   width: 200px;
   height: 200px;
   border-radius: 20px;
-  box-shadow: -1.2px 13.9px 32px 0 rgba(60, 60, 62, 0.27);
+  box-shadow: -1.2px 13.9px 32px rgba(60, 60, 62, 0.27);
   margin-top: 20px;
   margin-bottom: 20px;
-}
-.list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 10px;
-  width: 100%;
-  max-width: 800px;
 }
 </style>
